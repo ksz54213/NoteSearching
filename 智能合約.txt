@@ -1,0 +1,37 @@
+npm install truffle
+npm install -E openzeppelin-solidity "https://www.npmjs.com/package/zeppelin-solidity"
+
+truffle init 
+
+
+truffle compile
+truffle migrate
+truffle console
+....let contract
+....Token.deployed().then(instance=>contract=instance)
+....contract.(fun name)."call()"
+
+
+記得 Gaslimit 和 Gas 還有from
+
+合約地址在 truffle migrate :Saving successful migration to network... 上面
+
+var abi = 複製abi去轉碼
+
+Hello  = eth.contract(abi).get(合約地址)
+
+沒有constant的函數要這樣呼叫:
+	Hello.Say.sendTransaction("參數",{from:accs[0],gas:xxx})
+有的話直接呼叫
+
+
+
+TokenContract 幾大要素:
+	1.幣值數量
+	2.名字 , symbol, decimal
+	3.查兌金額(mapping) : balances
+	4.owner
+	5.buyPrice : 1Ether=x token
+	
+
+

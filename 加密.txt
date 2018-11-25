@@ -1,0 +1,51 @@
+加密技術:
+	輸出長度為 32 Byte
+	
+
+	SHA-256:
+		Output=256 bits
+	SHA-254:
+	
+	SHA-512:
+
+	RIPEMD-160: Linux=> openssl rmd160
+		Output: 16 Byte
+	
+	HASH160 :
+		把SHA-256輸出值在RIPEMD-160一次
+	
+	公開金鑰加密 (非對稱金鑰加密):
+		公開金鑰 Public key 可以讓人家知道的
+		私密金鑰 Private key
+			$openssl ecparam -genkey -name James -out James-private.pem
+			
+			以16進位產生私密金鑰
+			$openssl ec -in James-private.pem -outform DER |tail -c +8 
+			| head -c32 | xxd -p -c 32
+			
+			產生公開金鑰
+			$openssl ec -in James-private.pem -pubout -out James-public.pem
+			以16進位產生公開金鑰
+			$openssl ec -in James-private.pem -pubout -outform DER | 
+			tail -c 65 | xxd -p -c 65	
+	
+		數位簽章:
+			Server 對資料(server)使用雜湊函數 -> Hash值
+			Server 使用私鑰加密->簽章 傳送給Client
+			Client 對資料(Client)使用雜湊函數 -> Hash值
+			Client 使用公鑰把簽章解密 -> Hash值
+			把兩邊的Hash值比較是否一樣
+
+			產生數位簽章資料
+			$openssl dgst -SHA256 -sign "private-key" "Data" >
+			"Data".sig
+
+			使用金鑰驗證簽章
+			$openssl dgst -SHA26 -verify "Public-key" -signatrue
+			"Data".sig Data.txt
+			
+	共享金鑰加密 (對稱金鑰加密):
+
+
+
+		
